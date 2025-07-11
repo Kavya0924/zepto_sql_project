@@ -1,55 +1,55 @@
-🛒 Zepto E-commerce SQL Data Analyst Portfolio Project
-This is a complete, real-world data analyst portfolio project based on an e-commerce inventory dataset scraped from Zepto — one of India’s fastest-growing quick-commerce startups. This project simulates real analyst workflows, from raw data exploration to business-focused data analysis.
+# 🛒 Zepto E-commerce SQL Data Analyst Portfolio Project
 
-This project is perfect for:
+This is a comprehensive, real-world **Data Analyst Portfolio Project** built using SQL on an e-commerce inventory dataset scraped from **Zepto** — one of India’s fastest-growing quick-commerce startups. The project walks through real analyst workflows from raw data exploration to deriving actionable business insights.
 
-📊 Data Analyst aspirants who want to build a strong Portfolio Project for interviews and LinkedIn
-📚 Anyone learning SQL hands-on
-💼 Preparing for interviews in retail, e-commerce, or product analytics
-📌 Project Overview
-The goal is to simulate how actual data analysts in the e-commerce or retail industries work behind the scenes to use SQL to:
+---
 
-✅ Set up a messy, real-world e-commerce inventory database
+## 📌 Project Overview
 
-✅ Perform Exploratory Data Analysis (EDA) to explore product categories, availability, and pricing inconsistencies
+This project simulates how data analysts in retail or e-commerce domains work with messy, unstructured data to extract meaningful insights. You will:
 
-✅ Implement Data Cleaning to handle null values, remove invalid entries, and convert pricing from paise to rupees
+- ✅ Set up and normalize a real-world inventory database  
+- ✅ Perform **Exploratory Data Analysis (EDA)**  
+- ✅ Clean and transform raw data for analysis  
+- ✅ Write **business-driven SQL queries** for revenue, pricing, and inventory decisions  
 
-✅ Write business-driven SQL queries to derive insights around pricing, inventory, stock availability, revenue and more
+---
 
-📁 Dataset Overview
-The dataset was sourced from Kaggle and was originally scraped from Zepto’s official product listings. It mimics what you’d typically encounter in a real-world e-commerce inventory system.
+## 👤 Ideal For
 
-Each row represents a unique SKU (Stock Keeping Unit) for a product. Duplicate product names exist because the same product may appear multiple times in different package sizes, weights, discounts, or categories to improve visibility – exactly how real catalog data looks.
+- 📊 **Aspiring Data Analysts** building a strong portfolio  
+- 📚 Learners practicing **SQL hands-on**  
+- 💼 Interview prep for roles in **e-commerce, product analytics, or retail**  
 
-🧾 Columns:
+---
 
-sku_id: Unique identifier for each product entry (Synthetic Primary Key)
+## 📁 Dataset Overview
 
-name: Product name as it appears on the app
+The dataset was originally scraped from [Zepto's](https://www.zeptonow.com/) product listings and hosted on **Kaggle**. It resembles a real-world inventory table where each row represents a **Stock Keeping Unit (SKU)**.
 
-category: Product category like Fruits, Snacks, Beverages, etc.
+Duplicate product names exist due to multiple weights, sizes, or packaging – just like in a real catalog.
 
-mrp: Maximum Retail Price (originally in paise, converted to ₹)
+### 🧾 Columns:
+| Column | Description |
+|--------|-------------|
+| `sku_id` | Unique product identifier (Primary Key) |
+| `name` | Product name as listed |
+| `category` | Product category (e.g., Fruits, Snacks, Beverages) |
+| `mrp` | Maximum Retail Price (converted from paise to ₹) |
+| `discountPercent` | Discount applied on MRP |
+| `discountedSellingPrice` | Final selling price after discount |
+| `availableQuantity` | Quantity in stock |
+| `weightInGms` | Product weight in grams |
+| `outOfStock` | Boolean flag for stock availability |
+| `quantity` | Units per package |
 
-discountPercent: Discount applied on MRP
+---
 
-discountedSellingPrice: Final price after discount (also converted to ₹)
+## 🔧 Project Workflow
 
-availableQuantity: Units available in inventory
+### 1. 📥 Database & Table Creation
 
-weightInGms: Product weight in grams
-
-outOfStock: Boolean flag indicating stock availability
-
-quantity: Number of units per package (mixed with grams for loose produce)
-
-🔧 Project Workflow
-Here’s a step-by-step breakdown of what we do in this project:
-
-1. Database & Table Creation
-We start by creating a SQL table with appropriate data types:
-
+```sql
 CREATE TABLE zepto (
   sku_id SERIAL PRIMARY KEY,
   category VARCHAR(120),
@@ -62,66 +62,104 @@ CREATE TABLE zepto (
   outOfStock BOOLEAN,
   quantity INTEGER
 );
-2. Data Import
-Loaded CSV using pgAdmin's import feature.
+2. 📂 Data Import 
 
-If you're not able to use the import feature, write this code instead:
+Using pgAdmin, import the dataset (CSV).
+If using terminal:
 
-   \copy zepto(category,name,mrp,discountPercent,availableQuantity,
-            discountedSellingPrice,weightInGms,outOfStock,quantity)
-  FROM 'data/zepto_v2.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', ENCODING 'UTF8');
-Faced encoding issues (UTF-8 error), which were fixed by saving the CSV file using CSV UTF-8 format.
-3. 🔍 Data Exploration
-Counted the total number of records in the dataset
+bash
 
-Viewed a sample of the dataset to understand structure and content
+Copy code
 
-Checked for null values across all columns
+\copy zepto(category,name,mrp,discountPercent,availableQuantity, discountedSellingPrice,weightInGms,outOfStock,quantity) FROM 'data/zepto_v2.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', QUOTE '"', ENCODING 'UTF8'); 
 
-Identified distinct product categories available in the dataset
+Note: Fix encoding errors by saving the CSV as CSV UTF-8.
 
-Compared in-stock vs out-of-stock product counts
+3. 🔍 Data Exploration 
 
-Detected products present multiple times, representing different SKUs
+Total number of records
 
-4. 🧹 Data Cleaning
-Identified and removed rows where MRP or discounted selling price was zero
+Null value checks
 
-Converted mrp and discountedSellingPrice from paise to rupees for consistency and readability
+Unique product categories
 
-5. 📊 Business Insights
-Found top 10 best-value products based on discount percentage
+In-stock vs out-of-stock distribution
 
-Identified high-MRP products that are currently out of stock
+Duplicate product names/SKUs
 
-Estimated potential revenue for each product category
+4. 🧹 Data Cleaning 
 
-Filtered expensive products (MRP > ₹500) with minimal discount
+Remove rows where mrp = 0 or discountedSellingPrice = 0
 
-Ranked top 5 categories offering highest average discounts
+Convert pricing columns from paise to rupees for clarity
 
-Calculated price per gram to identify value-for-money products
+Normalize data types and formats
 
-Grouped products based on weight into Low, Medium, and Bulk categories
+5. 📊 Business Insights 
 
-Measured total inventory weight per product category
+🔝 Top 10 products with highest discount percentage
 
-This file contains:
+❌ High-MRP products currently out of stock
 
-Table creation
+💰 Estimated potential revenue per product category
 
-Data exploration
+🧾 Expensive items (MRP > ₹500) with low discount
 
-Data cleaning
+🏆 Top 5 categories with highest average discount
 
-SQL Business analysis
+⚖️ Price per gram analysis for value-for-money products
 
-Load the dataset into pgAdmin or any other PostgreSQL client
+📦 Weight classification into Low, Medium, Bulk
 
-Create a database and run the SQL file
+⚖️ Total inventory weight by product category
 
-📜 License
-MIT — feel free to fork, star, and use in your portfolio.
+🚀 Getting Started 
 
-👨‍💻 About the Author
-Hey, I’m Vattikuti kavya — a Data Analyst . 
+Clone the repository
+
+Load the dataset into pgAdmin or any PostgreSQL client
+
+Run the provided SQL scripts in order:
+
+01_create_table.sql
+
+02_import_data.sql
+
+03_exploration.sql
+
+04_cleaning.sql
+
+05_analysis.sql
+
+📜 License 
+
+MIT — Free to use, fork, modify, and showcase in your own portfolio or interviews.
+
+👨‍💻 About the Author 
+
+Hey, I’m Vattikuti Kavya — a B.Tech final-year student and aspiring Data Analyst with a strong foundation in SQL, SAP ABAP, and web development.
+Connect with me on LinkedIn and feel free to reach out!
+
+⭐️ Show Your Support 
+
+If you find this project helpful:
+
+⭐️ Star the repo
+
+🍴 Fork it
+
+👩‍💻 Use it in your own portfolio
+
+yaml
+
+Copy code
+
+--- Let me know if you'd like a separate `.sql` file structure or GitHub repo structure too. 
+
+window.__oai_logHTML?window.__oai_logHTML():window.__oai_SSR_HTML=window.__oai_SSR_HTML||Date.now();requestAnimationFrame((function(){window.__oai_logTTI?window.__oai_logTTI():window.__oai_SSR_TTI=window.__oai_SSR_TTI||Date.now()}))
+
+
+Tools
+
+ChatGPT can make mistakes. Check important info. See Cookie Preferences.
+
