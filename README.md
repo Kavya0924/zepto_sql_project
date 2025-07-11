@@ -148,18 +148,3 @@ If you find this project helpful:
 
 🍴 Fork it
 
-👩‍💻 Use it in your own portfolio
-
-yaml
-
-Copy code
-
---- Let me know if you'd like a separate `.sql` file structure or GitHub repo structure too. 
-
-window.__oai_logHTML?window.__oai_logHTML():window.__oai_SSR_HTML=window.__oai_SSR_HTML||Date.now();requestAnimationFrame((function(){window.__oai_logTTI?window.__oai_logTTI():window.__oai_SSR_TTI=window.__oai_SSR_TTI||Date.now()}))
-
-
-Tools
-
-ChatGPT can make mistakes. Check important info. See Cookie Preferences.
-
